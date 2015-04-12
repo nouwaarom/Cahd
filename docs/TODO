@@ -1,0 +1,17 @@
+v0.0.4
+*create basic debugger
+*create better user interface
+*return usefull information at compiling failure
+
+
+v0.0.5 ->
+*implement routing algorithm
+*implement function that converts gate array to cmos array
+*implement multilayer routing and placement
+*add multiple module support
+*cleanup old shitty code
+*implement small gpu demo
+
+
+
+

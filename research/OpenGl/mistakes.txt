@@ -1,0 +1,4 @@
+gluniform*f(loc, val) doesnt work
+	solution: http://encelo.netsons.org/2008/03/17/gluniform1f-is-working/
+	
+	

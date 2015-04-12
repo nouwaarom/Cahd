@@ -1,0 +1,2 @@
+* math.h is not linked by default, so it has to linked expicit -lm
+

@@ -1,0 +1,62 @@
+This document contains the ca-hdl specification
+
+c style syntax
+
+data in 2 formats:
+bool & bool-array
+
+standard operations are:
+and, or, not, xor
+    they can have a variable amount of parameters.
+
+clock:
+clock name = clock(freq_mHz)
+onLow()
+onFalling()
+onHigh()
+onRising()
+
+entry point:
+module entry()
+{
+    // ...
+}
+
+module structure:
+module name(arg, ... )
+{
+    //gates...
+    out(arg, ...)
+}
+
+retrieving multiple return value from a module
+module a()
+{
+    <c,d> = b()
+}
+//the function that 'a' calls
+module b()
+{
+    //return 2 values
+    out(a,b)
+}
+
+memory: memory name([bus_width], [adressbus_width])
+
+memory acces:
+    read:
+        name.read_enable = true
+        value = name[adress]
+        name.read_enable = false
+    write:
+        name.write_enable = true
+        name[adress] = value
+        name.write_enable = false
+
+initial memory set:
+memery ([bus_width], [adressbus_width], value_file.mem)
+
+value_file.mem:
+data in binary, hexadecimal and asci from byte to quadword
+
+

@@ -1,0 +1,19 @@
+layout generator:
+
+Goal: make a layout in which the total wirelength is as short as possible
+							 the total area is as small as possible
+							 the total amount of crossings is as small as possible
+							 the criterial path is as short as possible
+
+devide the problem into various sub-problems:
+	placement:
+	local routing.
+	global routing.	
+	final check.
+	
+placement:
+	iterative quadratic placement
+		http://www.ccodechamp.com/c-program-to-find-inverse-of-matrix/
+local routing:
+global routing:
+final check:
