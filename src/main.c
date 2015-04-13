@@ -3,6 +3,7 @@ Copyright 2013 Elbert van de Put
 
 TODO:
 Fix log bar to work with compiler and debugger
+Use getopt for command line parsing
 */
 //includes:
 #include <gtk/gtk.h>
