@@ -1,3 +1,3 @@
 ## Process with automake to generate Makefile.in
-SUBDIRS = src tests
+SUBDIRS = src
 CLEANFILES = *~

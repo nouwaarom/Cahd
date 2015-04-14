@@ -4,6 +4,8 @@ AC_PREREQ(2.65)
 AC_INIT([Cahd], [0.0.1], [elbert@t-matix.nl], [cahd])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
+AC_CONFIG_HEADERS([config.h])
+
 # Check for programs
 AC_PROG_CC
 AM_PROG_CC_C_O
@@ -20,6 +22,12 @@ AM_PATH_GTK_3_0([3.4.0], [
     GUI_CFLAGS="$GUI_CFLAGS $GTK_CFLAGS"
     GUI_LIBS="$GUI_LIBS $GTK_LIBS"
     ], [AC_MSG_ERROR([You need Gtk+ >= 3.4.0 to build $PACKAGE])])
+
+
+PKG_CHECK_MODULES(gtksourceview, [gtksourceview-3.0 >= 3.4.0],,
+    [AC_MSG_ERROR([You need gtksourceview3 >= 3.4.0 to build $PACKAGE])])
+GUI_CFLAGS="$GUI_CFLAGS $gtksourceview_CFLAGS"
+GUI_LIBS="$GUI_LIBS $gtksourceview_LIBS"
 
 # Add explicit linking flags
 GUI_LIBS="$GUI_LIBS -pthread -lm -lz -lrt"
