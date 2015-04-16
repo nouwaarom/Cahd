@@ -1,4 +1,6 @@
 #include "gui-main.h"
+#include "gui-editor.h"
+#include "gui-logger.h"
 
 void gui_init(int argc, char **argv, char *builderFile)
 {
@@ -27,6 +29,13 @@ void gui_init(int argc, char **argv, char *builderFile)
 
     gtk_builder_connect_signals(builder , NULL);
 
+    //populate data structures
+    Gui* gui = g_new0(Gui, 1);
+    gui->mainwindow = GTK_WINDOW(gtk_builder_get_object(builder, "statusbar"));
+
+    gui->editorgui = editorgui_init(builder);
+    gui->loggergui = loggergui_init(builder);
+    
     g_object_unref( G_OBJECT(builder));
 
     gtk_widget_show_all(window);

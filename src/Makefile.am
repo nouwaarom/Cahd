@@ -4,7 +4,13 @@ AUTOMAKE_OPTIONS = subdir-objects
 AM_CFLAGS = -g
 
 bin_PROGRAMS = cahd 
-cahd_SOURCES = gui/gui-main.c gui/gui-main.h \
+cahd_SOURCES = gui/gui-main.c    gui/gui-main.h \
+			   gui/gui-logger.c  gui/gui-logger.h \
+			   gui/gui-editor.c	 gui/gui-editor.h \
+			   logger.c			 logger.h \
+			   editor.c	    	 editor.h \
+			   simulator.c		 simulator.h \
+			   compiler.c		 compiler.h \
 			   main.c
 
 ## Add Gtk+ to the gui-program
