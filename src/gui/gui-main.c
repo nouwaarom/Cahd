@@ -27,16 +27,17 @@ void gui_init(int argc, char **argv, char *builderFile)
     //window declaration
     window = GTK_WIDGET( gtk_builder_get_object(builder, "main-window"));
 
-    gtk_builder_connect_signals(builder , NULL);
-
     //populate data structures
     Gui* gui = g_new0(Gui, 1);
-    gui->mainwindow = GTK_WINDOW(gtk_builder_get_object(builder, "statusbar"));
+    gui->mainwindow = GTK_WINDOW(gtk_builder_get_object(builder, "main-window"));
+    gui->statusbar = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));
 
     gui->editorgui = editorgui_init(builder);
     gui->loggergui = loggergui_init(builder);
+
+    gtk_builder_connect_signals(builder, NULL);
     
-    g_object_unref( G_OBJECT(builder));
+    g_object_unref(G_OBJECT(builder));
 
     gtk_widget_show_all(window);
 

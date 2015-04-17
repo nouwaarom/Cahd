@@ -6,7 +6,15 @@ add support for module calls
 */
 #include "simulator.h"
 
+G_MODULE_EXPORT
+void on_simulate_button_clicked(GtkWidget* widget, void* user)
+{
+    simulate("");
+    return;
+}
+
 int simulate(gchar *filename)
 {
+    g_printf("I am starting my simulation\n");
     return 1;
 }

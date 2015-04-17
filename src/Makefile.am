@@ -1,21 +1,17 @@
-## Process with automake to generate Makefile.in
 AUTOMAKE_OPTIONS = subdir-objects
 
-AM_CFLAGS = -g
+bin_PROGRAMS = cahd
+AM_CFLAGS = $(GUI_CFLAGS) \
+	        -Wall -O2
 
-bin_PROGRAMS = cahd 
-cahd_SOURCES = gui/gui-main.c    gui/gui-main.h \
-			   gui/gui-logger.c  gui/gui-logger.h \
-			   gui/gui-editor.c	 gui/gui-editor.h \
-			   logger.c			 logger.h \
-			   editor.c	    	 editor.h \
-			   simulator.c		 simulator.h \
-			   compiler.c		 compiler.h \
-			   main.c
+cahd_LDADD = $(GUI_LIBS)
+cahd_LDFLAGS = -export-dynamic
 
-## Add Gtk+ to the gui-program
-cahd_CPPFLAGS = @GUI_CFLAGS@
-cahd_LDADD = @GUI_LIBS@
-
-CLEANFILES = *~
-
+cahd_SOURCES =  editor.c editor.h \
+				compiler.c compiler.h \
+				simulator.c simulator.h \
+				environment.c environment.h \
+				gui/gui-main.c gui/gui-main.h \
+				gui/gui-editor.c gui/gui-editor.h \
+				gui/gui-logger.c gui/gui-logger.h \
+				main.c
