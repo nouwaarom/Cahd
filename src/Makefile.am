@@ -7,7 +7,8 @@ AM_CFLAGS = $(GUI_CFLAGS) \
 cahd_LDADD = $(GUI_LIBS)
 cahd_LDFLAGS = -export-dynamic
 
-cahd_SOURCES =  editor.c editor.h \
+cahd_SOURCES =  logger.c logger.h \
+				editor.c editor.h \
 				compiler.c compiler.h \
 				simulator.c simulator.h \
 				environment.c environment.h \

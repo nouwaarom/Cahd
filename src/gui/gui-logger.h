@@ -7,9 +7,14 @@
 typedef struct _LoggerGui LoggerGui;
 
 struct _LoggerGui {
-    GtkWidget* textview;
+    GtkTextView* textview;
+    GtkTextBuffer* buffer;
 };
 
 LoggerGui*
 loggergui_init(GtkBuilder* builder);
+
+//keeps a local copy of the buffer so you only need to pass it once
+void
+gui_log_append(gchar* markup, GtkTextBuffer* buffer);
 #endif

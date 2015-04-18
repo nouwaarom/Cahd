@@ -7,6 +7,8 @@ Copyright 2013 Elbert van de Put
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "logger.h"
+
 int
 simulate(gchar *filename);
 #endif

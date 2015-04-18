@@ -4,4 +4,6 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 
+#include "logger.h"
+
 #endif

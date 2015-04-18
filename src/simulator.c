@@ -15,6 +15,7 @@ void on_simulate_button_clicked(GtkWidget* widget, void* user)
 
 int simulate(gchar *filename)
 {
+    add_log(SIMULATOR, INFORMATION, "Starting simulation\n");
     g_printf("I am starting my simulation\n");
     return 1;
 }

@@ -15,3 +15,4 @@ missing
 aclocal.m4
 
 *.deps/
+src/cahd
