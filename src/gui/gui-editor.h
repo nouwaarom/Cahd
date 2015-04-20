@@ -8,6 +8,7 @@ typedef struct _EditorGui EditorGui;
 
 struct _EditorGui {
     GtkWidget* textview;
+    GtkTextBuffer* buffer;
 };
 
 EditorGui*

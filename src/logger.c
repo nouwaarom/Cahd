@@ -5,14 +5,17 @@ Copyright 2013 Elbert van de Put
 
 void add_log(LogSource source, LogLevel level, gchar* message)
 {
+    gchar* StatusString[] = {"Editing", "Compiling", "Simulating", "Uploading", "Fuu"};
     //only add title if the source of this log is different from the last one
     static LogSource localSource = PROGRAM;
     gboolean title;
 
     if(localSource == source)
         title = FALSE; 
-    else
+    else{
         title = TRUE;
+        gui_log_set_statusbar(StatusString[source], "EDITOR", NULL);
+    }
 
     localSource = source;
 

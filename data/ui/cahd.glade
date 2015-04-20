@@ -83,7 +83,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">simulate</property>
                     <property name="use_underline">True</property>
-		    <signal name="clicked" handler="on_simulate_button_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_simulate_button_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -91,11 +91,25 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkMenuToolButton" id="file-menu">
+                  <object class="GtkToolButton" id="open-button">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">file</property>
+                    <property name="label" translatable="yes">open</property>
                     <property name="use_underline">True</property>
+                    <signal name="clicked" handler="on_open_button_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="save-button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">save</property>
+                    <property name="use_underline">True</property>
+                    <signal name="clicked" handler="on_save_button_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
