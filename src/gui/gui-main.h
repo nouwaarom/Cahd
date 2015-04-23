@@ -4,8 +4,8 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
-#include "gui-editor.h"
-#include "gui-logger.h"
+#include "gui/gui-editor.h"
+#include "gui/gui-logger.h"
 
 typedef struct _Gui Gui;
 
@@ -20,5 +20,4 @@ struct _Gui {
 
 void
 gui_init(int argc, char** argv, char* builderFile);
-
 #endif

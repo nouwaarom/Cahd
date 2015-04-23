@@ -7,10 +7,17 @@
 typedef struct _EditorGui EditorGui;
 
 struct _EditorGui {
-    GtkWidget* textview;
-    GtkTextBuffer* buffer;
+    GtkTextView* textview;
+    GtkSourceBuffer* buffer;
 };
 
 EditorGui*
 editorgui_init(GtkBuilder* builder);
+
+gchar*
+ask_filename();
+
+//super asesome function
+GtkSourceBuffer*
+get_set_sourcebuffer(GtkSourceBuffer* buffer);
 #endif

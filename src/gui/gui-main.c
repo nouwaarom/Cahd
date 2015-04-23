@@ -24,10 +24,8 @@ void gui_init(int argc, char **argv, char *builderFile)
         return;
     }
 
-    //window declaration
     window = GTK_WIDGET( gtk_builder_get_object(builder, "main-window"));
 
-    //populate data structures
     Gui* gui = g_new0(Gui, 1);
     gui->mainwindow = GTK_WINDOW(gtk_builder_get_object(builder, "main-window"));
     gui->statusbar = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));

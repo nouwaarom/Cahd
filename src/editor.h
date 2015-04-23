@@ -2,6 +2,7 @@
 #define __EDITOR_H__
 
 #include <glib.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
@@ -12,12 +13,14 @@ typedef struct _Editor Editor;
 struct _Editor {
     gchar* filename;
     gchar* basename;
-
-    //gui related stuff
-    GtkWidget *source;
 };
 
 Editor*
 editor_init();
 
+void
+editorgui_save_file(gchar* filename);
+
+void
+editorgui_open_file(gchar* filename);
 #endif

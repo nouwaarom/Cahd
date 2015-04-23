@@ -15,7 +15,7 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkSourceView" id="source_gtksourceview">
+          <object class="GtkSourceView" id="sourceview">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="pixels_inside_wrap">7</property>
