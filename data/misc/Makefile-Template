@@ -1,0 +1,12 @@
+VC=nvc
+SOURCES=binaryCounter.vhd binaryCounterTest.vhd
+TOPLEVEL=counter_tb
+TIME=1ms
+WAVE=waveout
+
+compile: $(SOURCES)
+	$(VC) -a $(SOURCES) 
+
+simulate:
+	$(VC) -e $(TOPLEVEL)
+	$(VC) -r --stop-time=$(TIME) --wave=$(WAVE) $(TOPLEVEL)
