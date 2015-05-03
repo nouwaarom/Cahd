@@ -7,16 +7,9 @@
 #include <gtksourceview/gtksource.h>
 
 #include "gui/gui-editor.h"
+#include "environment.h"
 
-typedef struct _Editor Editor;
-
-struct _Editor {
-    gchar* filename;
-    gchar* basename;
-};
-
-Editor*
-editor_init();
+Environment* environment;
 
 void
 editorgui_save_file(gchar* filename);

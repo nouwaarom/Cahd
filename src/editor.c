@@ -4,6 +4,8 @@ G_MODULE_EXPORT
 void on_open_button_clicked(GtkWidget* widget, void* user)
 {
     gchar* filename = ask_filename(GTK_FILE_CHOOSER_ACTION_OPEN);
+    environment->filename = filename;
+    environment->dirname = g_path_get_dirname(filename); 
     editorgui_open_file(filename);
     return;
 }
@@ -12,14 +14,10 @@ G_MODULE_EXPORT
 void on_save_button_clicked(GtkWidget* widget, void* user)
 {
     gchar* filename = ask_filename(GTK_FILE_CHOOSER_ACTION_SAVE);
+    environment->filename = filename;
+    environment->dirname = g_path_get_dirname(filename);
     editorgui_save_file(filename);
     return;
-}
-
-Editor* editor_init()
-{
-    Editor* editor = g_new0(Editor,1);
-    return editor;
 }
 
 static void source_load_callback(GObject* source, GAsyncResult* res, gpointer data)

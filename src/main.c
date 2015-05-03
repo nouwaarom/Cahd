@@ -9,6 +9,9 @@
 #include "editor.h"
 #include "simulator.h"
 #include "compiler.h"
+#include "environment.h"
+
+Environment* environment;
 
 int main(int argc, char **argv)
 {
@@ -25,7 +28,8 @@ int main(int argc, char **argv)
     		 "You should have received a copy of the GNU General Public License\n"
     		 "along with this program.  If not, see <http://www.gnu.org/licenses/>.\n");
 
-    //setup gui for our application
+    environment = environment_init();
+
     gui_init(argc, argv, "../data/ui/cahd.glade");
 
     return 0;
