@@ -1,6 +1,4 @@
-#include "gui-main.h"
-#include "gui-editor.h"
-#include "gui-logger.h"
+#include "gui/gui-main.h"
 
 void gui_init(int argc, char **argv, char *builderFile)
 {
@@ -30,8 +28,9 @@ void gui_init(int argc, char **argv, char *builderFile)
     gui->mainwindow = GTK_WINDOW(gtk_builder_get_object(builder, "main-window"));
     gui->statusbar = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));
 
-    gui->editorgui = editorgui_init(builder);
-    gui->loggergui = loggergui_init(builder);
+    gui->editorgui  = editorgui_init(builder);
+    gui->loggergui  = loggergui_init(builder);
+    gui->managergui = managergui_init(builder);
 
     gtk_builder_connect_signals(builder, NULL);
     

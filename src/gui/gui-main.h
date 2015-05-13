@@ -6,12 +6,14 @@
 
 #include "gui/gui-editor.h"
 #include "gui/gui-logger.h"
+#include "gui/gui-manager.h"
 
 typedef struct _Gui Gui;
 
 struct _Gui {
-    EditorGui* editorgui;
-    LoggerGui* loggergui;
+    EditorGui*  editorgui;
+    LoggerGui*  loggergui;
+    ManagerGui* managergui;
 
     GtkWindow* mainwindow;
 
