@@ -7,6 +7,7 @@
 #include <gtksourceview/gtksource.h>
 
 #include "gui/gui-editor.h"
+#include "logger.h"
 #include "environment.h"
 
 Environment* environment;
