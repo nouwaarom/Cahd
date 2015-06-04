@@ -2,6 +2,9 @@
 #define __GUI_MANAGER_H__
 
 #include <gtk/gtk.h>
+#include "manager.h"
+#include "environment.h"
+#include "logger.h"
 
 typedef struct _ManagerGui ManagerGui;
 
@@ -9,6 +12,11 @@ struct _ManagerGui {
     GtkWidget* treeview;
     gchar* path;
 };
+
+Environment* environment;
+
+void
+row_activated_callback(GtkTreeView* tree_view, GtkTreePath* path, GtkTreeViewColumn* column, gpointer* user_data);
 
 void
 row_expanded_callback(GtkTreeView* tree_view, GtkTreeIter* iter, GtkTreePath* path, ManagerGui* user_data);

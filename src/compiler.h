@@ -5,6 +5,10 @@
 #include <glib.h>
 
 #include "logger.h"
+#include "environment.h"
+#include "manager.h"
+
+Environment* environment;
 
 int
 compile(gchar* path);

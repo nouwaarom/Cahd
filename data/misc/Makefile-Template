@@ -1,6 +1,6 @@
 VC=nvc
-SOURCES=binaryCounter.vhd binaryCounterTest.vhd
-TOPLEVEL=counter_tb
+SOURCES=%s
+TOPLEVEL=%s
 TIME=1ms
 WAVE=waveout
 

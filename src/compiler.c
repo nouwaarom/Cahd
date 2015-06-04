@@ -3,8 +3,35 @@
 G_MODULE_EXPORT
 void on_compile_button_clicked(GtkWidget* widget, void* user)
 {
-    add_log(COMPILER, INFORMATION, "Compile button clicked\n");
-    g_print("Compile button clicked.\n");
+    add_log(COMPILER, INFORMATION, "Compile button clicked");
+
+    GDir* dir;
+    gboolean has_make = FALSE;
+
+    // check if we have an active working directory
+    // and makefile
+    if(environment->dirname)
+    {
+        dir = g_dir_open(environment->dirname, 0, NULL); 
+
+        gchar* filename;
+
+        while( filename = g_dir_read_name(dir) )
+        {
+            if(g_strcmp0(filename, "Makefile") == 0) {
+                has_make = TRUE;
+                break;
+            }
+        }
+    }
+ 
+    if(!has_make) {
+        add_log(COMPILER, INFORMATION, "Creating makefile"); 
+        create_makefile();
+    }
+
+    // run the makefile
+
     return;
 }
 
@@ -53,7 +80,7 @@ static gboolean channel_err_callback(GIOChannel* channel, GIOCondition cond, voi
 int compile(gchar* path)
 {
     gchar *argv[] = {"make", "simulate"};
-    GPid *pid;
+    GPid pid;
 
     gint out, err;
     GIOChannel* out_ch;
@@ -63,7 +90,7 @@ int compile(gchar* path)
 
     //call makefile which does the compiling
     ret = g_spawn_async_with_pipes( path, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
-                                    NULL, NULL, pid, NULL, &out, &err, NULL );
+                                    NULL, NULL, &pid, NULL, &out, &err, NULL );
 
     if(!ret) {
         g_error("Starting make failed");
@@ -77,4 +104,6 @@ int compile(gchar* path)
 
     g_io_add_watch( out_ch, G_IO_IN | G_IO_HUP, (GIOFunc)channel_out_callback, NULL);
     g_io_add_watch( err_ch, G_IO_IN | G_IO_HUP, (GIOFunc)channel_err_callback, NULL);
+
+    return 1;
 }

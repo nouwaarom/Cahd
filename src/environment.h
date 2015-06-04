@@ -8,6 +8,7 @@ typedef struct _Environment Environment;
 struct _Environment {
     gchar* filename;
     gchar* dirname;
+    gchar* top_entity;
 };
 
 extern Environment* environment;

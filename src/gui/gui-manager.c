@@ -9,12 +9,33 @@ enum {
 ManagerGui* _managergui;
 
 
+void row_activated_callback(GtkTreeView* tree_view, GtkTreePath* tree_path, GtkTreeViewColumn* column, gpointer* user_data)
+{
+    GtkTreeIter iter;
+    gchar* value;
+
+    GtkTreeModel* model = gtk_tree_view_get_model(tree_view);
+    gtk_tree_model_get_iter(model, &iter, tree_path);
+    gtk_tree_model_get(model, &iter, NAME_COL, &value, -1);
+
+    environment->top_entity = g_strdup(value);
+
+    add_log(PROGRAM, INFORMATION, g_strdup_printf("New top level: %s\n", value));
+
+    return;
+}
+
 void row_expanded_callback(GtkTreeView* tree_view, GtkTreeIter* iter, GtkTreePath* tree_path, ManagerGui* managergui)
 {
     GtkTreeModel* model = gtk_tree_view_get_model(tree_view);
 
-    gchar* value;
+    gchar* value, *type;
     gchar* path = "";
+
+    //do not try to fill the tree if we click a file
+    gtk_tree_model_get(model, iter, TYPE_COL, &type, -1);
+    if(0 == g_strcmp0(type, "file"))
+        return;
 
     //retrieve the path
     GtkTreeIter iter_cpy = *iter;
@@ -28,7 +49,6 @@ void row_expanded_callback(GtkTreeView* tree_view, GtkTreeIter* iter, GtkTreePat
 
         gtk_tree_path_up(tree_path);
 
-        g_printf("Value: %s\n", value);
         path = g_strdup_printf("%s/%s/", value, path);
     }
 
@@ -49,11 +69,14 @@ ManagerGui* managergui_init(GtkBuilder* builder)
 
     init_view_and_model(managergui->treeview);
 
+    g_signal_connect(G_OBJECT(managergui->treeview), "row-activated",
+                        G_CALLBACK(row_activated_callback), NULL);
+
     g_signal_connect(G_OBJECT(managergui->treeview), "row-expanded",
                         G_CALLBACK(row_expanded_callback), _managergui);
 
     get_set_treeview(managergui->treeview);
-    set_model_dir("/home/elbert/Documents/");
+    set_current_dir("/home/elbert/Documents/test-project");
 
     return managergui;
 }
@@ -118,6 +141,15 @@ void recursive_dir_crawl(gchar* path, GtkTreeStore* treestore, GtkTreeIter* iter
                 GtkTreeIter newChild;
                 gtk_tree_store_append(treestore, &newChild, &child); 
             }
+        }
+        if(g_strrstr(name, ".vhd"))
+        {
+            GtkTreeIter entityIter;     
+            gchar* entity = scan_file_entities( g_strdup_printf("%s/%s", path, name) );
+            gtk_tree_store_append(treestore, &entityIter, &child);
+            gtk_tree_store_set(treestore, &entityIter,
+                                NAME_COL, entity, TYPE_COL, "entity", -1);
+
         }
     }
 }
