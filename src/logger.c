@@ -30,9 +30,9 @@ gchar* create_markup(LogSource source, LogLevel level, gchar* message, gboolean 
     gchar* LogSourceString[] = {"Editor", "Compiler", "Simulator", "Uploader", "Program"};
 
     gchar* Title = "";
-    if(title){
+    if(title) {
         Title = g_strdup_printf("<big>%s:</big>", LogSourceString[source]);
+        return g_strdup_printf("\n%s\n%s", Title, message);
     }
-
-    return g_strdup_printf("\n%s\n%s", Title, message);
+    return g_strdup_printf("\n%s", message);
 }

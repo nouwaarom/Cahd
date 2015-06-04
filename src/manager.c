@@ -17,7 +17,7 @@ void create_makefile(void)
     while( filename = g_dir_read_name(dir) )
     {
         if(g_strstr_len(filename, -1, ".vhd"))
-           sources = g_strdup_printf("%s %s", sources, filename); 
+           sources = g_strdup_printf("%s %s", filename, sources); 
     }
 
     gchar* template;

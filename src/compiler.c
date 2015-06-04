@@ -30,15 +30,9 @@ void on_compile_button_clicked(GtkWidget* widget, void* user)
         create_makefile();
     }
 
-    // run the makefile
+    // Execute make 
+    compile(environment->dirname);
 
-    return;
-}
-
-
-static void child_watch_callback(GPid pid, gint status, void* user)
-{
-    g_spawn_close_pid(pid);
     return;
 }
 
@@ -79,7 +73,7 @@ static gboolean channel_err_callback(GIOChannel* channel, GIOCondition cond, voi
 
 int compile(gchar* path)
 {
-    gchar *argv[] = {"make", "simulate"};
+    gchar *argv[] = {"make", "compile", NULL};
     GPid pid;
 
     gint out, err;
@@ -88,8 +82,8 @@ int compile(gchar* path)
 
     gboolean ret;
 
-    //call makefile which does the compiling
-    ret = g_spawn_async_with_pipes( path, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
+    //call make which does the compiling
+    ret = g_spawn_async_with_pipes( path, argv, NULL, G_SPAWN_SEARCH_PATH,
                                     NULL, NULL, &pid, NULL, &out, &err, NULL );
 
     if(!ret) {
@@ -97,8 +91,6 @@ int compile(gchar* path)
         return -1;
     }
 
-    g_child_watch_add(pid, (GChildWatchFunc)child_watch_callback, NULL);
- 
     out_ch = g_io_channel_unix_new(out);
     err_ch = g_io_channel_unix_new(err);
 
