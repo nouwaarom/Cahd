@@ -48,6 +48,7 @@ AC_SUBST(GUI_LIBS)
 AC_SUBST(GUI_CFLAGS)
 AC_CONFIG_FILES([Makefile
 		 src/Makefile
+         tests/Makefile
 		 ])
 AC_OUTPUT
 

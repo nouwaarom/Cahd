@@ -16,3 +16,4 @@ aclocal.m4
 
 *.deps/
 src/cahd
+tests/cahdtest
