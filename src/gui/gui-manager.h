@@ -5,6 +5,7 @@
 #include "manager.h"
 #include "environment.h"
 #include "logger.h"
+#include "editor.h"
 
 typedef struct _ManagerGui ManagerGui;
 

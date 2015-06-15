@@ -55,7 +55,7 @@ void editorgui_save_file(gchar* filename)
 
 void editorgui_open_file(gchar* filename)
 {
-    add_log(EDITOR, INFORMATION, "Opening file ...");
+    add_log(EDITOR, INFORMATION, g_strdup_printf("Opening file: %s", filename));
 
     GtkSourceBuffer* buffer = get_set_sourcebuffer(NULL);
     GFile* file = g_file_new_for_path(filename);

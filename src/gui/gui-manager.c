@@ -13,14 +13,27 @@ void row_activated_callback(GtkTreeView* tree_view, GtkTreePath* tree_path, GtkT
 {
     GtkTreeIter iter;
     gchar* value;
+    gchar* type;
 
     GtkTreeModel* model = gtk_tree_view_get_model(tree_view);
     gtk_tree_model_get_iter(model, &iter, tree_path);
+
+    //check the type we clicked
+    gtk_tree_model_get(model, &iter, TYPE_COL, &type, -1);
     gtk_tree_model_get(model, &iter, NAME_COL, &value, -1);
 
-    environment->top_entity = g_strdup(value);
+    if(g_strcmp0(type, "entity") == 0)
+    {
+        environment->top_entity = g_strdup(value);
 
-    add_log(PROGRAM, INFORMATION, g_strdup_printf("New top level: %s\n", value));
+        add_log(PROGRAM, INFORMATION, g_strdup_printf("New top level: %s", value));
+    }
+    else if(g_strcmp0(type, "file") == 0)
+    {
+        gchar* path = g_strdup_printf("%s/%s", environment->dirname, value);
+        environment->filename = value;
+        editorgui_open_file(path); 
+    }
 
     return;
 }
