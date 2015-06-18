@@ -62,6 +62,14 @@ void editorgui_open_file(gchar* filename)
     GtkSourceFile* sourceFile = gtk_source_file_new();
     gtk_source_file_set_location(sourceFile, file);
 
+    //set the proper syntax higlighting
+    GtkSourceLanguageManager* language_manager = gtk_source_language_manager_new();
+    GtkSourceLanguage *lang = gtk_source_language_manager_guess_language(language_manager, filename, NULL);
+    
+    add_log(EDITOR, INFORMATION, g_strdup_printf("Source Language: %s.", gtk_source_language_get_name(lang)));
+
+    gtk_source_buffer_set_language(buffer, lang);
+
     GtkSourceFileLoader* loader = gtk_source_file_loader_new(buffer, sourceFile);
 
     gtk_source_file_loader_load_async(loader, G_PRIORITY_DEFAULT,  NULL, NULL, NULL, NULL, source_load_callback, NULL);

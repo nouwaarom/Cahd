@@ -9,6 +9,7 @@ EditorGui* editorgui_init(GtkBuilder* builder)
     editorgui->buffer = gtk_text_view_get_buffer(editorgui->textview);
     gtk_source_buffer_set_highlight_matching_brackets(editorgui->buffer, TRUE);
 
+
     get_set_sourcebuffer(editorgui->buffer);
 
     return editorgui;
