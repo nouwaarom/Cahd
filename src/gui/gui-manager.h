@@ -6,11 +6,13 @@
 #include "environment.h"
 #include "logger.h"
 #include "editor.h"
+#include <string.h>
 
 typedef struct _ManagerGui ManagerGui;
 
 struct _ManagerGui {
     GtkWidget* treeview;
+    GtkEntryBuffer* path_entry_buffer;
     gchar* path;
 };
 

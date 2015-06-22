@@ -8,6 +8,16 @@ enum {
 
 ManagerGui* _managergui;
 
+void path_entry_activated_callback(GtkEntry* entry, gpointer* user_data)
+{
+    gchar* path = gtk_entry_buffer_get_text(_managergui->path_entry_buffer);
+
+    path = g_strdup(path);
+    g_strdelimit(path, "\n", '\0');
+    set_current_dir(path);
+
+    return;
+}
 
 void row_activated_callback(GtkTreeView* tree_view, GtkTreePath* tree_path, GtkTreeViewColumn* column, gpointer* user_data)
 {
@@ -79,8 +89,16 @@ ManagerGui* managergui_init(GtkBuilder* builder)
     _managergui = managergui;
 
     managergui->treeview = GTK_WIDGET(gtk_builder_get_object(builder, "treeview1")); 
+    GtkEntry* path_entry = gtk_builder_get_object(builder, "path_entry");
+
+    managergui->path_entry_buffer = gtk_entry_get_buffer(path_entry);
+    
+    gtk_entry_buffer_set_text(managergui->path_entry_buffer, "Path entry initialized", -1);
 
     init_view_and_model(managergui->treeview);
+
+    g_signal_connect(G_OBJECT(path_entry), "activate",
+                        G_CALLBACK(path_entry_activated_callback), NULL);
 
     g_signal_connect(G_OBJECT(managergui->treeview), "row-activated",
                         G_CALLBACK(row_activated_callback), NULL);
@@ -121,6 +139,8 @@ void set_model_dir(gchar* path)
 {
     GtkTreeStore* treestore;
     _managergui->path = path;
+
+    gtk_entry_buffer_set_text(_managergui->path_entry_buffer, path, -1);
 
     treestore = gtk_tree_store_new(NUM_COLS, G_TYPE_STRING, G_TYPE_STRING);
 
